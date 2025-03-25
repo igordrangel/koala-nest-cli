@@ -13,7 +13,10 @@
     "prepublishOnly": "npm test",
     "preversion": "npm run lint",
     "version": "git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "deploy:hotfix": "npm version patch",
+    "deploy:feature": "npm version minor",
+    "deploy:release": "npm version major"
   },
   "bin": {
     "koala-nest": "dist/index.js"
