@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonJs",
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "types": ["vitest/globals"],
-    "paths": {
-      "@/*": ["./apps/example/src/*"],
-      "@koalarx/nest/*": ["./apps/koala-nest/src/*"]
-    },
+    "module": "commonjs",
+    "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -20,12 +20,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "vitest.config.e2e.mts",
-    "vitest.config.mts"
-  ]
+    "resolveJsonModule": true,
+    "types": ["vitest/globals"]
+  }
 }
