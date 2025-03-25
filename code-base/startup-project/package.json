@@ -6,13 +6,18 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "npm run swc:copy-files && nest build",
+    "swc:copy-files": "npx swc src --copy-files -d dist",
     "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start:dev": "npm run swc:copy-files && nest start --watch",
+    "start:debug": "npm run swc:copy-files && nest start --debug --watch",
+    "start:prod": "node dist/infra/main",
+    "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/* && npx eslint --fix .eslintrc.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "vitest run --config ./vitest.config.e2e.mts",
+    "test:cov": "vitest run --coverage",
+    "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
+    "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "test:all": "npm run test && npm run test:e2e"
   },
   "dependencies": {
