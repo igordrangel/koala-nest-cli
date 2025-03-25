@@ -1,0 +1,60 @@
+{
+  "name": "@koalarx/nest-cli",
+  "version": "1.0.0",
+  "description": "Biblioteca de CLI para criação de projetos utilizando Koala Nest",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cov": "vitest run --coverage",
+    "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
+    "build": "node .github/scripts/publish.js",
+    "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/*",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
+    "preversion": "npm run lint",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "bin": {
+    "koala-nest": "dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igordrangel/koala-nest-cli.git"
+  },
+  "keywords": [
+    "Nest.js"
+  ],
+  "author": "Igor D. Rangel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igordrangel/koala-nest-cli/issues"
+  },
+  "homepage": "https://github.com/igordrangel/koala-nest-cli#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.2.2",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^1.2.0",
+    "@types/node": "^18.14.0",
+    "@types/node-fetch": "^2.6.4",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.3.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.2.2"
+  },
+  "tsup": {
+    "entry": [
+      "src"
+    ],
+    "dts": true
+  }
+}
