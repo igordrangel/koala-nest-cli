@@ -15,11 +15,11 @@ export function newProject(projectName: string) {
   readme = readme.replace('[projectName]', projectName)
   writeFileSync(path.join(process.cwd(), projectName, 'README.md'), readme)
 
-  const env = readFileSync(path.join(path.join(process.cwd(), 'code-base/env', 'config.txt'))).toString()
+  const env = readFileSync(path.join(path.join(__dirname, 'code-base/env', 'config.txt'))).toString()
   writeFileSync(path.join(process.cwd(), projectName, '.env'), env)
 
-  const gitIgnore = readFileSync(path.join(path.join(process.cwd(), 'code-base/gitignore', 'config.txt'))).toString()
-  writeFileSync(path.join(process.cwd(), projectName, '.env'), gitIgnore)
+  const gitIgnore = readFileSync(path.join(path.join(__dirname, 'code-base/gitignore', 'config.txt'))).toString()
+  writeFileSync(path.join(process.cwd(), projectName, '.gitignore'), gitIgnore)
 
   execSync(`cd ${projectName} && npm install && npx prisma generate`, {
     stdio: 'inherit',
