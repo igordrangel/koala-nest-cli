@@ -1,7 +1,9 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-fs.rmSync('dist', { recursive: true })
+if (fs.existsSync('dist')) {
+  fs.rmSync('dist', { recursive: true })
+}
 
 execSync(`tsup`, { stdio: "inherit" });
 
