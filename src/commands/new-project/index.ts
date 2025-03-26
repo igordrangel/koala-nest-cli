@@ -15,8 +15,8 @@ export function newProject(projectName: string) {
   readme = readme.replace('[projectName]', projectName)
   writeFileSync(path.join(process.cwd(), projectName, 'README.md'), readme)
 
-  const env = readFileSync(path.join(path.join(__dirname, 'code-base/env', 'config.txt'))).toString()
-  env.replace(/\[projectName\]/g, projectName.replace(/-/g, '_'))
+  let env = readFileSync(path.join(path.join(__dirname, 'code-base/env', 'config.txt'))).toString()
+  env = env.replace(/\[projectName\]/g, projectName.replace(/-/g, '_'))
   writeFileSync(path.join(process.cwd(), projectName, '.env'), env)
 
   const gitIgnore = readFileSync(path.join(path.join(__dirname, 'code-base/gitignore', 'config.txt'))).toString()
