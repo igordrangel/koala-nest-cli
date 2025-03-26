@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "npm run swc:copy-files && nest start --watch",
     "start:debug": "npm run swc:copy-files && nest start --debug --watch",
-    "start:prod": "node dist/infra/main",
+    "start:prod": "node dist/host/main",
     "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/* && npx eslint --fix .eslintrc.js",
     "test": "vitest run",
     "test:watch": "vitest",
