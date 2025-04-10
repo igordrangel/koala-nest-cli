@@ -1,37 +1,26 @@
-FROM node:20.18.0 AS builder
+ARG NODE_VERSION=23.11.0-slim
+FROM node:${NODE_VERSION}
 
 # Criando diretório de trabalho
 WORKDIR /home/node/app
 
-# Copiando arquivos de configuração
-COPY package.json ./
-COPY package-lock.json ./
-COPY prisma ./prisma/
+# Copiando arquivos de configuração com permissões
+COPY --chown=node:node package.json package-lock.json ./
 
 # Instalando dependências
-RUN npm ci --force
+RUN npm ci
 
-# Copiando arquivos do app
-COPY . .
+# Copiando o restante do código com permissões
+COPY --chown=node:node . .
 
-# Compilando app
+# Compilando o app
 RUN npm run build
 
-FROM node:20.18.0
-
-# Criando diretório de trabalho
-WORKDIR /home/node/app
-
-COPY --chown=node:node --from=builder /home/node/app/node_modules ./node_modules
-COPY --chown=node:node --from=builder /home/node/app/package.json ./dist/package.json
-COPY --chown=node:node --from=builder /home/node/app/package*.json ./
-COPY --chown=node:node --from=builder /home/node/app/dist ./dist
-COPY --chown=node:node --from=builder /home/node/app/prisma ./prisma
-
-ENV NODE_ENV production
-
+# Alterando o usuário para "node" por segurança
 USER node
 
+# Expondo a porta da aplicação
 EXPOSE 3000
 
-CMD npx prisma migrate deploy && npm run start:prod
+# Comando para iniciar o app
+CMD ["npx", "prisma", "migrate", "deploy", "&&", "npm", "run", "start:prod"]
