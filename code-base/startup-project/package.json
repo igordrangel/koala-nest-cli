@@ -20,8 +20,8 @@
     "test:all": "npm run test && npm run test:e2e"
   },
   "dependencies": {
-    "@koalarx/utils": "^4.0.8",
-    "@koalarx/nest": "^1.11.13",
+    "@koalarx/utils": "^4.1.1",
+    "@koalarx/nest": "^1.12.0",
     "@nestjs/common": "^11.0.12",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.12",
