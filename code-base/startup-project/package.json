@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@koalarx/utils": "^4.2.1",
-    "@koalarx/nest": "^1.15.2",
+    "@koalarx/nest": "^1.16.0",
     "@nestjs/common": "^11.0.12",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.12",
