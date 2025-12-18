@@ -26,8 +26,7 @@ if (existsSync('dist')) {
 
 mkdirSync('dist', { recursive: true });
 
-// Copiar arquivos TypeScript sem compilação
-copyRecursively('src', 'dist/src');
+copyRecursively('src', 'dist');
 
 writeFileSync(
   "dist/package.json",
