@@ -18,11 +18,13 @@ jobs:
       - name: 🔨 Build Project
         run: bun install --frozen-lockfile && bun run build
 
-      - name: Publish npm package
+      - name: Setup Node for publish
         uses: actions/setup-node@v3
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: bun publish --access public --ignore-scripts
+
+      - name: Publish npm package
+        run: npm publish --access public --ignore-scripts
         env:
           NPM_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
