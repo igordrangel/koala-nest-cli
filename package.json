@@ -16,9 +16,9 @@
     "deploy:feature": "npm version minor",
     "deploy:release": "npm version major"
   },
-  "main": "dist/src/index.ts",
+  "main": "dist/index.ts",
   "bin": {
-    "koala-nest": "dist/src/commands/new-project/index.ts"
+    "koala-nest": "dist/commands/new-project/index.ts"
   },
   "repository": {
     "type": "git",
