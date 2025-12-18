@@ -18,7 +18,8 @@ jobs:
       - name: 🔨 Build Project
         run: bun install --frozen-lockfile && bun run build
 
+      - name: Setup npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > dist/.npmrc
+
       - name: Publish npm package
-        run: bun publish --access public --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+        run: cd dist && bun publish --access public --ignore-scripts
