@@ -10,18 +10,18 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/host/main",
-    "lint": "prettier --end-of-line lf --write . && npx eslint --fix src/**/* && npx eslint --fix .eslintrc.js",
+    "start:prod": "bun dist/host/main.js",
+    "lint": "prettier --end-of-line lf --write . && bunx eslint --fix src/**/* && bunx eslint --fix .eslintrc.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
     "test:e2e": "vitest run --config ./vitest.config.e2e.mts",
-    "test:all": "npm run test && npm run test:e2e"
+    "test:all": "bun run test && bun run test:e2e"
   },
   "dependencies": {
     "@koalarx/utils": "^4.2.1",
-    "@koalarx/nest": "^1.16.1",
+    "@koalarx/nest": "^1.18.1",
     "@nestjs/common": "^11.0.12",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.12",

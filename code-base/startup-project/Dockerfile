@@ -1,26 +1,26 @@
-ARG NODE_VERSION=23.11.0-slim
-FROM node:${NODE_VERSION}
+ARG BUN_VERSION=latest
+FROM oven/bun:${BUN_VERSION}
 
 # Criando diretório de trabalho
-WORKDIR /home/node/app
+WORKDIR /home/bun/app
 
 # Copiando arquivos de configuração com permissões
-COPY --chown=node:node package.json package-lock.json ./
+COPY --chown=bun:bun package.json bun.lockb ./
 
 # Instalando dependências
-RUN npm ci
+RUN bun install --frozen-lockfile
 
 # Copiando o restante do código com permissões
-COPY --chown=node:node . .
+COPY --chown=bun:bun . .
 
 # Compilando o app
-RUN npm run build
+RUN bun run build
 
-# Alterando o usuário para "node" por segurança
-USER node
+# Alterando o usuário para "bun" por segurança
+USER bun
 
 # Expondo a porta da aplicação
 EXPOSE 3000
 
 # Comando para iniciar o app
-CMD ["npx", "prisma", "migrate", "deploy", "&&", "npm", "run", "start:prod"]
+CMD ["bun", "run", "start:prod"]
