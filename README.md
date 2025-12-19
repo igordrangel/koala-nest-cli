@@ -9,10 +9,12 @@ Ferramenta oficial de CLI para scaffolding rápido de projetos NestJS estruturad
 ## 📦 Instalação
 
 ```bash
-npm install -g @koalarx/nest-cli
+bun add -g @koalarx/nest-cli
 ```
 
-**Requisito:** Node.js 20.18.0+
+**Requisitos:** 
+- Bun 1.0.0+ ([Instale o Bun](https://bun.sh))
+- Node.js 20.18.0+ (necessário para executar os projetos criados)
 
 ## 🚀 Uso Rápido
 
@@ -23,12 +25,11 @@ koala-nest new meu-projeto
 # Entrar no diretório
 cd meu-projeto
 
-# Instalar dependências
-npm install
-
-# Iniciar desenvolvimento
+# Iniciar desenvolvimento (as dependências são instaladas automaticamente com bun)
 npm run start:dev
 ```
+
+> **Nota:** A CLI utiliza **Bun** por debaixo dos panos para instalar os pacotes do projeto no comando `koala-nest new`. Isso torna o processo mais rápido e eficiente.
 
 ## 📖 Documentação Completa
 
