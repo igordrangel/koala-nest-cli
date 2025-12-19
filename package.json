@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/nest-cli",
-  "version": "1.2.20",
+  "version": "1.2.21",
   "description": "Biblioteca de CLI para criação de projetos utilizando Koala Nest",
   "scripts": {
     "test": "vitest run",
