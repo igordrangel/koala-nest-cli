@@ -1,15 +1,12 @@
 {
-  // Use o IntelliSense para saber mais sobre os atributos possíveis.
-  // Focalizar para exibir as descrições dos atributos existentes.
-  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
       "type": "node",
       "request": "launch",
-      "name": "Nest Debug",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
+      "name": "Nest Debug (Bun)",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "start:debug"],
       "console": "integratedTerminal",
       "restart": true,
       "protocol": "auto",
@@ -19,22 +16,24 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Unit Tests",
-      "autoAttachChildProcesses": true,
-      "skipFiles": ["<node_internals>/**"],
+      "name": "Debug Unit Tests (Bun)",
+      "runtimeExecutable": "bun",
       "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
       "args": ["run", "${relativeFile}"],
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"],
       "smartStep": true,
       "console": "integratedTerminal"
     },
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug E2E Tests",
-      "autoAttachChildProcesses": true,
-      "skipFiles": ["<node_internals>/**"],
+      "name": "Debug E2E Tests (Bun)",
+      "runtimeExecutable": "bun",
       "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
       "args": ["run", "${relativeFile}", "--config", "./vitest.config.e2e.ts"],
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"],
       "smartStep": true,
       "console": "integratedTerminal"
     }
