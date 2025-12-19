@@ -16,10 +16,11 @@
     "deploy:feature": "npm version minor",
     "deploy:release": "npm version major"
   },
-  "main": "dist/index.ts",
+  "main": "index.js",
   "bin": {
-    "koala-nest": "index.ts"
+    "koala-nest": "index.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-nest-cli.git"

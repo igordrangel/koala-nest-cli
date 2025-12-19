@@ -1,5 +1,6 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 
 function copyRecursively(src: string, dest: string): void {
   if (!existsSync(dest)) {
@@ -26,6 +27,10 @@ if (existsSync('dist')) {
 
 mkdirSync('dist', { recursive: true });
 
+// Compilar TypeScript com Bun
+execSync('bun build ./src/index.ts --outdir ./dist --format esm --target node', { stdio: 'inherit' });
+
+// Copiar outros arquivos TypeScript sem compilação
 copyRecursively('src', 'dist');
 
 writeFileSync(
@@ -43,4 +48,4 @@ writeFileSync("dist/LICENSE", readFileSync("LICENSE").toString(), "utf8");
 // Copiar code-base
 copyRecursively("code-base", "dist/code-base");
 
-console.log("Build completed - TypeScript files copied without compilation (Bun native support)");
+console.log("Build completed - Files prepared for distribution");
