@@ -2,18 +2,10 @@
 
 import program from 'commander'
 import inquirer from 'inquirer'
-import { readFileSync } from 'fs'
-import path from 'path'
 import { newProject } from './commands/new-project'
 import chalk from 'chalk'
 import figlet from 'figlet'
-import { fileURLToPath } from 'url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const packageJsonPath = path.join(__dirname, '../package.json')
-const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
+import packageJson from '../package.json' with { type: 'json' }
 
 program.version(packageJson.version)
 
