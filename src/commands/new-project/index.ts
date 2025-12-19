@@ -3,6 +3,10 @@ import chalk from 'chalk'
 import { execSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export function newProject(projectName: string) {
   copyFolder(path.join(__dirname, 'code-base/startup-project'), projectName)
