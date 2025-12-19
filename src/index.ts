@@ -4,12 +4,19 @@ import program from 'commander'
 import inquirer from 'inquirer'
 import { newProject } from './commands/new-project'
 import chalk from 'chalk'
-import figlet from 'figlet'
 import packageJson from '../package.json' with { type: 'json' }
 
-program.version(packageJson.version)
+const banner = `
+  _  __           _         _   _           _      ____ _     ___ 
+ | |/ /___   __ _| | __ _  | \\ | | ___  ___| |_   / ___| |   |_ _|
+ | ' // _ \\ / _\` | |/ _\` | |  \\| |/ _ \\/ __| __| | |   | |    | |
+ | . \\ (_) | (_| | | (_| | | |\\  |  __/\\__ \\ |_  | |___| |___ | |
+ |_|\\_\\___/ \\__,_|_|\\__,_| |_| \\_|\\___||___/\\__|  \\____|_____|___|
+`
 
-console.log(chalk.cyan(figlet.textSync('Koala Nest CLI')))
+console.log(chalk.cyan(banner))
+
+program.version(packageJson.version)
 
 program
   .command('new [projectName]')
