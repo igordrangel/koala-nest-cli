@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prisma:generate": "prisma generate && nest build prisma && bun prisma/scripts/fix-extensions.mjs",
+    "prisma:generate": "prisma generate && tsc --project tsconfig.build-prisma.json && bun prisma/scripts/fix-extensions.mjs",
     "build": "nest build app",
     "start": "nest start app",
     "start:dev": "nest start app --watch",

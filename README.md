@@ -30,7 +30,41 @@ bun start:dev
 
 > **Nota:** A CLI utiliza **Bun** por debaixo dos panos para instalar os pacotes do projeto no comando `koala-nest new`. Isso torna o processo mais rápido e eficiente.
 
-## 📖 Documentação Completa
+## Comandos Disponíveis
+
+### `prisma:generate`
+
+Comando especializado que substitui o comando nativo do Prisma para compatibilidade com a biblioteca `@koalarx/nest`.
+
+```bash
+bun run prisma:generate
+```
+
+#### O problema:
+
+As versões mais recentes do Prisma utilizam um provider que gera arquivos de cliente com importações que não funcionam corretamente ao ser integrados com a biblioteca `@koalarx/nest`. O comando nativo `prisma generate` não resolve esses problemas automaticamente.
+
+#### A solução:
+
+Este comando executa uma sequência de operações para corrigir os importes e garantir compatibilidade total:
+
+1. **`prisma generate`** — Gera o cliente Prisma baseado no schema atual
+2. **`tsc --project tsconfig.build-prisma.json`** — Compila os arquivos TypeScript gerados na pasta `prisma/generated` para JavaScript utilizando a configuração específica do Prisma
+3. **`bun prisma/scripts/fix-extensions.mjs`** — Corrige os importes ESM dos arquivos compilados, adicionando extensões `.js` onde necessário
+
+#### Por que não usar `prisma generate` diretamente:
+
+O comando nativo do Prisma gera importações relativas sem extensão (ex: `from './generated'`), que não funcionam corretamente com ESM e causam incompatibilidades com a biblioteca `@koalarx/nest`. Este comando customizado resolve isso automaticamente.
+
+#### Quando executar:
+
+- Após modificar `prisma/schema.prisma`
+- Ao atualizar as versões do Prisma ou NestJS
+- Antes de fazer deploy em produção (incluído no CI/CD)
+
+> **Importante:** Sempre use `bun run prisma:generate` ao invés do comando nativo `prisma generate` ao trabalhar com projetos `@koalarx/nest`.
+
+## Documentação Completa
 
 Para guias detalhados, exemplos avançados e referência de features, consulte:
 
