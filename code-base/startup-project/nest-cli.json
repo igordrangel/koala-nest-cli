@@ -1,19 +1,34 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
-  "entryFile": "host/main",
-  "deleteOutDir": true,
-  "compilerOptions": {
-    "builder": "swc",
-    "plugins": [
-      {
-        "name": "@nestjs/swagger",
-        "options": {
-          "classValidatorShim": false,
-          "introspectComments": true
-        }
+  "monorepo": true,
+  "projects": {
+    "app": {
+      "type": "application",
+      "sourceRoot": "src",
+      "entryFile": "host/main",
+      "compilerOptions": {
+        "builder": "swc",
+        "deleteOutDir": true,
+        "plugins": [
+          {
+            "name": "@nestjs/swagger",
+            "options": {
+              "classValidatorShim": false,
+              "introspectComments": true
+            }
+          }
+        ]
       }
-    ]
+    },
+    "prisma": {
+      "type": "library",
+      "root": "./prisma",
+      "sourceRoot": "generated",
+      "entryFile": "client",
+      "compilerOptions": {
+        "tsConfigPath": "tsconfig.build-prisma.json"
+      }
+    }
   }
 }

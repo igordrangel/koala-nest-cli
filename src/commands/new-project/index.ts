@@ -26,7 +26,7 @@ export function newProject(projectName: string) {
   const gitIgnore = readFileSync(path.join(path.join(__dirname, 'code-base/gitignore', 'config.txt'))).toString()
   writeFileSync(path.join(process.cwd(), projectName, '.gitignore'), gitIgnore)
 
-  execSync(`cd ${projectName} && bun install && bunx prisma generate`, {
+  execSync(`cd ${projectName} && bun install && bun run prisma:generate`, {
     stdio: 'inherit',
   })
 

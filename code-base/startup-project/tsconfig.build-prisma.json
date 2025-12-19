@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {"outDir": "dist/prisma"},
+  "include": ["prisma"],
+  "exclude": ["node_modules", "src", "dist", "**/*.config.*", "**/*.test.ts"]
+}
