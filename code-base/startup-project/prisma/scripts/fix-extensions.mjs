@@ -25,4 +25,7 @@ function fix(p) {
   }
 }
 
-try { fix(dir); } catch (e) {}
+try { fix(dir); } catch (e) {
+  console.error('Error fixing extensions:', e);
+  process.exit(1);
+}

@@ -1,0 +1,10 @@
+[test]
+root = "apps"
+testPatterns = [
+  "**/*.spec.ts",
+  "**/*.e2e-spec.ts"
+]
+timeoutMs = 60000
+
+[loader]
+".ts" = "tsx"

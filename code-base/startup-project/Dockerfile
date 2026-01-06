@@ -1,20 +1,41 @@
-ARG BUN_VERSION=latest
-FROM oven/bun:${BUN_VERSION}
+ARG BUN_VERSION=1.3.5-debian
+
+# ====== STAGE 1: BUILDER ======
+FROM oven/bun:${BUN_VERSION} AS builder
 
 # Criando diretório de trabalho
 WORKDIR /home/bun/app
 
 # Copiando arquivos de configuração com permissões
-COPY --chown=bun:bun package.json bun.lockb ./
+COPY package.json bun.lock ./
 
 # Instalando dependências
 RUN bun install --frozen-lockfile
 
 # Copiando o restante do código com permissões
-COPY --chown=bun:bun . .
+COPY . .
+
+ENV DATABASE_URL=" "
 
 # Compilando o app
-RUN bun run build
+RUN bun run prisma:generate && bun run build
+
+# ====== STAGE 2: RUNTIME ======
+FROM oven/bun:${BUN_VERSION}
+
+# Create a non-root user and group
+RUN apt-get update -y && \
+  apt-get install -y openssl curl && \
+  apt-get clean
+
+# Criando diretório de trabalho
+WORKDIR /home/bun/app
+
+# Copiando apenas os arquivos necessários do builder
+COPY --from=builder --chown=bun:bun --chmod=555 /home/bun/app/node_modules ./node_modules
+COPY --from=builder --chown=bun:bun --chmod=555 /home/bun/app/prisma ./prisma
+COPY --from=builder --chown=bun:bun --chmod=555 /home/bun/app/dist ./dist
+COPY --from=builder --chown=bun:bun --chmod=555 /home/bun/app/package.json ./package.json
 
 # Alterando o usuário para "bun" por segurança
 USER bun
